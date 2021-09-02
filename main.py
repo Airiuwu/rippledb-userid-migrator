@@ -9,17 +9,9 @@ async def main(CYAN='\033[96m', ENDC='\033[0m', botUser=999, db=AsyncSQLPool()):
 				await select_cursor.execute('SELECT id FROM users')
 				async for row in select_cursor:
 					userID = row['id']
+                                        newUserID = int(userID) - 997
 					if userID == botUser:
-						newUserID = int(userID) - 1000 + 2
-					elif userID >= 1000 and userID <= 9999:
-						subtractBy = 1000
-					elif userID >= 10000 and userID <= 99999:
-						subtractBy = 10000
-					elif userID >= 100000 and userID <= 999999:
-						subtractBy = 100000
-					elif userID >= 1000000 and userID <= 9999999:
-						subtractBy = 1000000
-					newUserID = int(userID) - int(subtractBy) + 3
+						newUserID = 1
 					# Update userid values in database
 					await update_cursor.execute(f'UPDATE auto_beatmap_playcount SET user_id = {int(newUserID)} WHERE user_id = {int(userID)};'
 												f'UPDATE auto_stats SET id = {int(newUserID)} WHERE id = {int(userID)};'
