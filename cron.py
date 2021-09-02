@@ -8,7 +8,7 @@ if not SQL: raise Exception('Could not connect to SQL.')
 r = redis.Redis(host='localhost', port=6379, db=0)
 
 def calculateRanksAuto():
-    r.delete(r.keys("ripple:leaderboard_auto:*"))
+    os.system("redis-cli --scan --pattern ripple:leaderboard_auto:* | xargs redis-cli del")
 
     for gamemode in ['std', 'taiko', 'ctb', 'mania']:
         print(f'Mode: {gamemode}')
@@ -27,7 +27,7 @@ def calculateRanksAuto():
                 r.zadd(f'ripple:leaderboard_auto:{gamemode}:{country}', userID, pp)
 
 def calculateRanksRelax():
-    r.delete(r.keys("ripple:leaderboard_relax:*"))
+    os.system("redis-cli --scan --pattern ripple:leaderboard_relax:* | xargs redis-cli del")
 
     for gamemode in ['std', 'taiko', 'ctb', 'mania']:
         print(f'Mode: {gamemode}')
@@ -46,7 +46,7 @@ def calculateRanksRelax():
                 r.zadd(f'ripple:leaderboard_relax:{gamemode}:{country}', userID, pp)
 
 def calculateRanks():
-    r.delete(r.keys("ripple:leaderboard:*"))
+    os.system("redis-cli --scan --pattern ripple:leaderboard:* | xargs redis-cli del")
 
     for gamemode in ['std', 'taiko', 'ctb', 'mania']:
         print(f'Mode: {gamemode}')
