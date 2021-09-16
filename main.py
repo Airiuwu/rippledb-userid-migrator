@@ -1,7 +1,7 @@
 import asyncio, os, aiomysql, uvloop, config, cron
 from cmyui import AsyncSQLPool
 
-async def main(CYAN='\033[96m', ENDC='\033[0m', botUser=999, db=AsyncSQLPool()):
+async def main(CYAN='\033[96m', ENDC='\033[0m', botUser=config.botID, db=AsyncSQLPool()):
 	await db.connect(config.mysql)
 	async with db.pool.acquire() as conn:
 		async with conn.cursor(aiomysql.DictCursor) as update_cursor:
@@ -9,7 +9,7 @@ async def main(CYAN='\033[96m', ENDC='\033[0m', botUser=999, db=AsyncSQLPool()):
 				await select_cursor.execute('SELECT id FROM users')
 				async for row in select_cursor:
 					userID = row['id']
-                                        newUserID = int(userID) - 997
+					newUserID = int(userID) - 997
 					if userID == botUser:
 						newUserID = 1
 					# Update userid values in database
