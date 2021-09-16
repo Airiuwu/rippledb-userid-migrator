@@ -6,3 +6,4 @@ mysql = {
     'maxsize': 16
 }
 avatarDir = ''
+botID = ''
