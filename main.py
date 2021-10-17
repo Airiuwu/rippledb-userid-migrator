@@ -56,9 +56,8 @@ async def main(CYAN='\033[96m', ENDC='\033[0m', botUser=config.botID, db=AsyncSQ
 				print(f'{CYAN}Auto Increment Changed -> {int(lastID)}{ENDC}')
 
 				# Update leaderboards for new userid values
-				cron.calculateRanks()
-				cron.calculateRanksRelax()
-				cron.calculateRanksAuto()
+				os.system('python3.9 cron.py')
+
 
 				print(f'{CYAN}Leaderboards updated for new users.{ENDC}')
 
