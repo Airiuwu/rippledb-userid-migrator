@@ -18,10 +18,10 @@ ENDC 		= '\033[0m'
 
 try:
     cnx = mysql.connector.connect(
-        user       = config.mysql.user,
-        password   = config.mysql.password,
-        host       = config.mysql.host,
-        database   = config.mysql.db,
+        user       = config.mysql["user"],
+        password   = config.mysql["password"],
+        host       = config.mysql["host"],
+        database   = config.mysql["db"],
         autocommit = True)
 except mysql.connector.Error as err:
     if err.errno == errorcode.ER_ACCESS_DENIED_ERROR:
